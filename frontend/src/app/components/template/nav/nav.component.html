@@ -1,0 +1,33 @@
+<mat-sidenav-container class="container">
+    <mat-sidenav class="sidenav" mode="side" opened fixedInViewport="true" fixedTopGap="64">
+        <mat-nav-list class="nav-list">
+                <a mat-list-item routerLink="/">
+                    <i class="material-icons">
+                        home
+                    </i>
+                    Início
+                </a>
+                <a mat-list-item routerLink="/produtos">
+                    <i class="material-icons">
+                        storefront
+                    </i>
+                    Produtos
+                </a>
+                <a mat-list-item routerLink="/produtos/detalhar/{{ n }}" *appLoop="let n em [1, 2, 3]">
+                    <i class="material-icons">
+                        pages
+                    </i>
+                    Produto {{ n }}
+                </a>
+                <a mat-list-item routerLink="/listar2">
+                    <i class="material-icons">
+                        web
+                    </i>
+                    Listar Exemplo SchematicsMaterial
+                </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

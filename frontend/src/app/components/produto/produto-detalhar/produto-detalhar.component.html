@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-title>Detalhes do Produto</mat-card-title>
+    <form>
+        <mat-form-field>
+            <input matInput placeholder="Nome" 
+                [value]="produto.nome" name="nome" disabled>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Preço (R$)"
+                [value]="produto.preco" name="preco" disabled>
+        </mat-form-field>
+    </form>
+    <button (click)="voltar()" mat-raised-button>
+        Listar todos
+    </button>
+</mat-card>

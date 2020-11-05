@@ -1,0 +1,308 @@
+Aula 02 - Criando backend:
+	- Tarefas realizadas:
+		- Na pasta do projeto, executar o comando: # mkdir backend (no terminal)
+		- Executar o comando: # cd backend (no terminal)
+		- Na pasta do backend, executar o comando: # npm init -y (no terminal)
+		- Executar o comando: # npm i json-server (no terminal - para adicionar a dependência json-server no projeto)
+		Obs.: json-server lê um arquivo json e disponibiliza API com base nesse arquivo
+		- Criar arquivo db.json (será a base de dados do backend)
+		- Inserir no arquivo package.json, no atributo scripts:
+			"start": "json-server --watch db.json --port 3001"
+		- Na pasta do backend, executar o comando: # npm start (no terminal)
+		- Acesse a aplicação pelo navegador: http://localhost:3001/produtos
+
+Aula 02 - Conceitos sobre Angular:
+	Angular:
+		- Aplicação organizada em componentes e módulos
+	Componente Angular:
+		É composto por: TS (comportamento) + HTML (estrutura) + CSS (estilo)
+		É acessado por uma TAG PERSONALIZADA (selector do componente), por exemplo: <app-home></app-home>
+	Módulo Angular:
+		Possui 5 atributos:
+			Declarations: declarar componentes, diretivas e pipes que fazem parte do módulo
+			Imports: importação de módulos externos para uso no módulo
+			Exports: declarar os componentes, diretivas e pipes que ficaram visíveis para fora do módulo
+			Providers: declarar os serviços
+			Bootstrap: define o componente que será carregado no módulo (Só no AppModule - módulo principal)
+
+Aula 03 - Criando Frontend:
+	- Tarefas realizadas:
+		- Na pasta do projeto, executar o comando de instalação do CLI do Angular: 
+			# npm i -g @angular/cli (no terminal)
+		- Na pasta do projeto, executar comando de criar projeto angular:
+			# ng new frontend --minimal
+			Obs.: ng é o comando básico do Angular (ng são as primeiras letras da palavra angular após o A)
+			Responder a 1ª pergunta com y (usar rotas)
+			Responder a 2ª pergunta com CSS (usar CSS para estilo)
+		- Na pasta do projeto, executar comando: # cd frontend (entrar na pasta criada)
+		- Na pasta do frontend, executar comando: # npm start (compilar projeto frontend)
+		- Acesse a aplicação pelo navegador: http://localhost:4200/
+
+Aula 04 - Desenvolvendo Template do Frontend:
+	- Tarefas realizadas:
+		- No arquivo angular.json, editar os atributos "inlineTemplate" e "inlineStyle" para  false (separar os arquivos do componente - veio true por conta da clasula minimal)
+		-  Remover do arquivo app.component.ts o atributo "template" e "style" (pois estão inline), e adicionar "templeteUrl: 'app.component.html'" e criar o arquivo "app.component.html" dentro da pasta "app".
+	
+	- Instalando os componentes do MATERIAL:
+		- Na pasta do frontend, executar comando: 
+			# ng add @angular/material
+			Responder a 1ª pergunta sobre o tema a ser utilizado: enter
+			Responder a 2ª pergunta sobre o uso da tipografia do material no projeto todo: y
+			Responder a 3ª pergunta sobre o uso da as animações do material: y
+		- Na pasta do frontend, executar comando: # npm start (compilar projeto frontend)
+	
+	- Implementar COMPONENTE HEADER:
+		- Na pasta do frontend, executar comando: 
+			# ng g c components/template/header       OU # ng generate component components/template/header
+			Obs.: na saída do terminal é possível verificar que o Angular criou os três arquivos que compõe o componente e atualizou o app.module.ts, adicionando o novo componente.
+		- Importar a "toolbar" do material:
+			- Entrar no app.module.ts e importar o MatToolbarModule
+		- Incluir a TAG do Header no arquivo "app.component.html".
+		- Editar os arquivos header.component.html e header.component.css. 
+	- Instalando os componentes do MATERIAL:
+		- Na pasta do frontend, executar comando: 
+			# ng add @angular/material
+			Responder a 1ª pergunta sobre o tema a ser utilizado: enter
+			Responder a 2ª pergunta sobre o uso da tipografia do material no projeto todo: y
+			Responder a 3ª pergunta sobre o uso da as animações do material: y
+		- Na pasta do frontend, executar comando: # npm start (compilar projeto frontend)
+	
+	- Implementar COMPONENTE FOOTER
+		- Na pasta do frontend, executar comando: 
+			# ng g c components/template/footer       OU # ng generate component components/template/footer
+			Obs.: na saída do terminal é possível verificar que o Angular criou os três arquivos que compõe o componente e atualizou o app.module.ts, adicionando o novo componente.
+		- Incluir a TAG <app-footer> no arquivo "app.component.html".
+		- Editar os arquivosfooter.component.html e footer.component.css. 
+
+	- Implementar COMPONENTE DE NAVEGAÇÃO
+		- Na pasta do frontend, executar comando: 
+			# ng g c components/template/nav       OU # ng generate component components/template/nav
+			Obs.: na saída do terminal é possível verificar que o Angular criou os três arquivos que compõe o componente e atualizou o app.module.ts, adicionando o novo componente.
+		- Importar mais dois Módulos do Material para uso na aplicação "MatSidenavModule" e "MatListModule":
+			- Entrar no app.module.ts e importar "MatSidenavModule" e "MatListModule"
+		- Incluir a TAG <app-nav> no arquivo "app.component.html".
+		- Editar os arquivos nav.component.html e nav.component.css. 
+
+Aula 05 - Conceitos Importantes do Angular: Componetes, Diretivas, Rotas, Pipes, Observables, Services
+	- Diretivas:
+		- Attribute Directive: 
+			altera estilo ou comportamento
+			criar uma class no arquivo TS e colocar o decorator @Directive({selector: '[nomeDiretiva]'})
+			exemplo uso: <i nomeDiretiva>icone</i>
+		- Structural Directive: 
+			adiciona ou remove elementos da DOM
+			exemplo: <ul><li *ngFor="let produto of produtos">{{ produto.nome }}</li></ul>
+		- Property Binding:
+			ligar uma declaração no HTML com um atributo da classe no TS
+			exemplo: <table [dataSource]="produtos"></table>
+				<p [id]="propriedadeIdDefinidaNoTS">exemplo de uso de binding</p>
+		- Event Binding:
+			ligar evento de um elemente HTML a um método da classe no TS
+			exemplo: <button (click)="createProduto()">Salvar</button>
+		- One Way Data Binding:
+			data bindind de direção única, do componente TS para o HTML
+			Alterou no TS altera no HTML, por exemplo o uso do Property Binding (binding de atributo)
+			exemplo: <input [value]="nome"> (no TS na classe deve haver um atributo nome)
+		- Two Way Data Binding:
+			data binding de direção dupla.
+			alterou no HTML altera no TS, alterou no TS altera no HTML.
+			exemplo: <input [(ngModel)]="nome">  (no TS na classe deve haver um atributo nome)
+	- Rotas:
+		Navegação entre os componentes da aplicação, pelas urls dos componentes (rotas)
+		exemplo: /home (comp. Home) -> /produto (comp. Prod.) -> /usuario (Comp. Usuario)
+	- Pipes:
+		Processamentos em cima de variáveis
+		exemplo:  <td>O vencimento é {{ produto.vencimento | date }}</td>
+		                <td>Preço é {{ produto.preco | currency: 'BRL' }}</td>
+			<td>A validade do desconto é  {{ produto.validadeDesconto | date: 'fullDate' | uppercase }}</td>
+	- Observables:
+		Trabalha o conceito de Programação Reativa (ReactiveX - framework de programação reativa)
+		import { Observable } from "rxjs";
+		Tudo começa a partir do padrão Observer (padrão mais utilizado na web)
+			- Padrão orientado a Evento;
+			- O evento ocorre, o Subject (intermediário) percebe que o evento ocorreu e notifica aos Observer que se registraram no Subject para aquele evento;
+			- A responsabilidade de acompanhar (observar) a execução de um evento é delegada ao Subject, por meio do registro do Observer e recebimento da notificação;
+		Observables são REUSÁVEIS; trabalham com STREAM DADOS, e possuem OPERADORES (funções prontas para processamento dos dados que você está observando);
+		Trabalha com programação (chamadas) assincronas;
+		exemplo:
+			- Implementação do Observer:
+			criarProdutoNoBackend(produto: Produto): Observable<Produto> {
+				return this.http.post<Produto>(this.url, produto); (o backend pode demorar na resposta)
+			}
+			- Implementação do Subject:
+			criarProduto(): void {
+				this.criarProdutoNoBackend(this.produto).subscribe(() => {
+					this.exibirMensagem("Salvo com sucesso!");
+				});
+			}
+
+	- Services:
+		Classes para organizar e compartilhar métodos e dados entre componentes:
+		Separar as responsabilidades: 
+			- regras da parte visual fica nos componentes
+			- regras da parte não visual nos services (por exemplo: acesso ao backend)
+		Para criar um Service: # ng g s services/produto
+
+Aula 05 - Desenvolvendo Elementos Angular do Frontend:
+	- Implementar COMPONENTE HOME
+		- Na pasta do frontend, executar comando: 
+			# ng g c views/home       OU # ng generate component views/home
+			Obs.: na saída do terminal é possível verificar que o Angular criou os três arquivos que compõe o componente e atualizou o app.module.ts, adicionando o novo componente.
+		- Incluir a TAG <app-home> no arquivo "nav.component.html".
+		- Importar mais um Módulo do Material para uso na aplicação "MatCardModule":
+			- Entrar no app.module.ts e importar "MatCardModule"
+		- Editar os arquivos home.component.html e home.component.css. 
+
+	- Implementar COMPONENTE CADASTRO PRODUTO (PRODUTO-CRUD)
+		- Na pasta do frontend, executar comando: 
+			# ng g c views/produto-crud      OU # ng generate component views/produto-crud
+			Obs.: na saída do terminal é possível verificar que o Angular criou os três arquivos que compõe o componente e atualizou o app.module.ts, adicionando o novo componente.
+		- Incluir a TAG <app-produto-crud> no arquivo "nav.component.html" para visualizar a tela, enquanto criação a navegação automática.
+		- Editar os arquivos produto-crud.component.html e produto-crud.component.css. 
+
+	- Implementar navegação entre componentes (CONFIGURAR ROTAS):
+		- No arquivo "nav.component.htm", inserir dentro da tag do conteúdo a TAG <router-outlet></router-outlet>
+		- No arquivo "app-routing.modules.ts", inserir no array routes as rotas do sistema:
+			exemplo: const routes: Routes = [{ path: "", component: HomeComponent }, { path: "produtos", component: ProdutoCrudComponent}];
+		- No arquivo ""nav.component.htm", inserir dentro de cada tag a referente ao menu principal a propriedade "routerLink";
+			exemplo: <a mat-list-item routerLink="/produtos"><i class="material-icons">storefront</i>Produtos</a>
+
+	- Implementar Diretivas:
+		- Diretiva de atributo:
+			- Na pasta do frontend, executar comando: 
+				# ng g d directives/red
+			Obs.: na saída do terminal é possível verificar que o Angular criou um arquivo TS e atualizou o app.module.ts, adicionando a nova diretiva (import e mais um elemente dentro de declarations)
+			- No arquivo da diretiva "red.directive.ts" é possível implementar o comportamento da diretiva:
+				exemplo: constructor(private el: ElementRef) { el.nativeElement.style.color = '#e35e6b'  }
+			- Para usar a diretiva nos elementos HTML basta colocar o seletor da @Directive({selector: '[appRed]'})
+				exemplo: <i class="material-icons v-middle" appRed> favorite </i>
+
+		- Diretiva estrutural:
+			- Na pasta do frontend, executar comando: 
+				# ng g d directives/loop
+			Obs.: na saída do terminal é possível verificar que o Angular criou um arquivo TS e atualizou o app.module.ts, adicionando a nova diretiva (import e mais um elemente dentro de declarations)
+			- No arquivo da diretiva "loop.directive.ts" é possível implementar o comportamento estrutural da diretiva:
+				exemplo:
+					@Input('appLoopEm') numbers: number[] -- variável que recebe o parametro na diretiva
+
+					constructor(private container: ViewContainerRef, private template: TemplateRef<any>) { }
+
+					ngOnInit(): void {
+						for (let number of this.numbers) {
+						this.container.createEmbeddedView(this.template, { $implicit : number })
+						}
+					}
+			- Para usar a diretiva estrutural nos elementos HTML basta colocar o seletor precedido do "*"
+				exemplo: <a routerLink="/produtos/{{ n }}" *appLoop="let n em [1, 2, 3]">Produto {{ n }}</a>
+
+	- Implementar COMPONENTE CRIAR PRODUTO
+		- Na pasta do frontend, executar comando: 
+			# ng g c components/produto/produto-criar
+			Obs.: na saída do terminal é possível verificar que o Angular criou os três arquivos que compõe o componente e atualizou o app.module.ts, adicionando o novo componente.
+		- Incluir o componente nas rotas:
+			No arquivo "app-routing.modules.ts", inserir no array routes as rotas do novo componente:
+			Exemplo: const routes: Routes = [.... { path: "produtos/criar", component: ProdutoCriarComponent} ....];
+		- O componente de criar produto será invodado pelo componente crud de produto a partir de um botão, para tanto:
+		- Importar mais um Módulo do Material para uso na aplicação "MatButtonModule":
+			- Entrar no app.module.ts e importar "MatButtonModule"
+		- Criar o botão no arquivo "produto-crud.component.html" para disparar o evento de chamar o componente de criar produto, através do Binding de Evento: (click)="navegarParaCriarProduto()"
+		- Criar no arquivo "produto-crud.component.ts" o método que será chamado no Binding: 
+			exemplo: navegarParaCriarProduto(): void { this.router.navigate(['/produtos/criar']) }
+		- Editar os arquivos produto-criar.component.html e produto-criar.component.css. 
+
+	- Implementar PRODUTO MODELO:
+		- Na pasta components/produto, criar o arquivo: "produto.model.ts";
+		- No arquivo definir o modelo:
+			exemplo: 
+				export interface Produto {  
+					id?: number
+    					nome: string
+   					preco: number
+				}
+
+	- Implementar PRODUTO SERVICE:
+		- Na pasta do frontend, executar comando: 
+			# ng g s components/produto/produto
+			Obs.: na saída do terminal é possível verificar que o Angular criou somente um arquivo "produto.service.ts" e não atualizou o app.module.ts, pois o serviço só é incluindo no atrabuito providers caso seja necessário expor o service para fora do modulo.
+		- Editar o arquivo produto.service.ts com os métodos a serem utilizados nos componentes;
+		- Editar o arquivo de componente injetando o servico no construtor e chamndo em algum método.
+			exemplo:
+				export class ProdutoCriarComponent implements OnInit {
+ 					 constructor(private produtoService: ProdutoService, private router: Router) { }
+ 					 ngOnInit(): void {  }
+ 					criarProduto(): void{ this.produtoService.criarProduto("Produto")  }
+				}
+
+	- Implementar MÉTODO CRIAR PRODUTO:
+		- Para a execução do método será necessário realizar requisições e para tanto usaremos o HttpClient do Angular
+		- Importar mais um Módulo do Material para uso na aplicação "HttpClientModule":
+			- Entrar no app.module.ts e importar "HttpClientModule"
+		- Editar o arquivo produto.service.ts criando o método e utilizando as requisções do "HttpClientModule";
+			exemplo: 
+			create(produto: Produto): Observable<Produto> { return this.http.post<Produto>(this.baseUrl, produto)  }
+		- Editar o arquivo "produto-criar.component.ts" ajustando o médoto criarProduto para chamar o método de criar do produto.service.ts;
+			exemplo:
+			criarProduto(): void{
+    				this.produtoService.create(this.produto).subscribe(() => {
+				      this.produtoService.exibirMensagem("Produto Salvo com sucesso!!!")
+				      this.router.navigate(['/produtos'])
+				    })
+			}
+
+	- Implementar captura de ERRO NA CHAMADA PARA API:
+		- acrescentar função pipe no final da chamada http:
+		exemplo: 
+			create(produto: Produto): Observable<Produto> { 
+				return this.http.post<Produto>(this.baseUrl, produto).pipe(
+      					map((obj) => obj),
+      					catchError((e) => this.tratarErro(e))
+   				 ); 
+			}
+			tratarErro(e: any): Observable<any> {
+				this.exibirMensagem("Ocorreu um erro de acesso!", true);
+				return EMPTY
+			}
+
+	- Implementar FORMULÁRIO CRIAR PRODUTO:
+		- Para criação de formulário é necessário utilizar modulos do Angular e do Material
+		- Importar o Módulo do Angular para formulário para uso na aplicação "FormsModule":
+			- Entrar no app.module.ts e importar "FormsModule"
+		- Importar mais dois Módulos do Material para uso na aplicação "MatFormFieldModule" e "MatInputModule":
+			- Entrar no app.module.ts e importar "MatFormFieldModule" e "MatInputModule"
+		- Editar o arquivo "produto-criar.component.html" ajustando as tags HTML para utilizarem o atributo produto definido em "produto-criar.component.ts" (utilizando o Two Way Data Binding);
+			exemplo: <input matInput placeholder="Nome" [(ngModel)]="produto.nome" name="nome">
+		
+	- Implementar COMPONENTE LISTAR PRODUTO
+		- Na pasta do frontend, executar comando: 
+			# ng g c components/produto/produto-listar
+			Obs.: na saída do terminal é possível verificar que o Angular criou os três arquivos que compõe o componente e atualizou o app.module.ts, adicionando o novo componente.
+		- O componente de listar produtos será invodado pelo componente crud de produto
+		- Incluir a TAG do novo component <app-produto-listar></app-produto-listar> no arquivo "produto-crud.component.html";
+		- Editar o arquivo "produto.service.ts" criando o método de listar os produtos do backend;
+			exemplo:   read(): Observable<Produto[]> { return this.http.get<Produto[]>(this.baseUrlAPI) }
+		- Editar o arquivo "produto-listar.component.css" criando o método de listar os produtos utilizando o service;
+			exemplo: 
+  				ngOnInit(): void { this.produtoService.read().subscribe(produtos => { this.produtos = produtos }) }
+		- Editar os arquivos produto-listar.component.html e produto-listar.component.css;
+			exemplo: <ul><li *ngFor="let produto of produtos">Produto: {{ produto.nome }}</li></ul>
+	
+	- Implementar LOCALE no projeto (por exemplo para separadores de milhares):
+		- Importar o LOCALE do Módulo do Angular Core:
+			- Entrar no app.module.ts e incluir no importe LOCALE_ID: 
+			import { NgModule, LOCALE_ID } from '@angular/core';
+		- Ainda em app.module.ts, incluir no Array providers o provide de LOCALE_ID:
+			providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
+		- Importar o Modulo Locales PT e o RegisterLocaleData do Angular COMMON:
+			- No app.module.ts e incluir no importe localePt
+			import localePt from '@angular/common/locales/pt';
+			import { registerLocaleData } from '@angular/common';
+			- Registar a localização no próprio app.module.ts:
+			registerLocaleData(localePt);
+			
+
+	- Implementar COMPONENTE LISTAR PRODUTO (SCHEMATICS MATERIAL)
+		- Na pasta do frontend, executar comando: 
+			# ng generate @angular/material:table components/produto/produto-listar2
+			Obs.: na saída do terminal é possível verificar que o Angular criou quatro arquivos que compõe o componente com schema do Material e atualizou o app.module.ts, adicionando o novo componente e os modulos do Material utilizado no componente.
+		- O componente de listar2 será invodado pelo componente crud de produto
+		- Incluir a TAG do novo component <app-produto-listar2></app-produto-listar2> no arquivo "produto-crud.component.html";
